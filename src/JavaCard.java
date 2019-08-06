@@ -1,4 +1,4 @@
-public class Card {
+public class JavaCard {
     private int value;
     private String suite;
     private boolean faceUp;
