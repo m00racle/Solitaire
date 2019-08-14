@@ -22,9 +22,9 @@ class Deck {
 
     private fun getSuite(i: Int) = when(i/13){
             //since i was declared as integer means the division will result in integer
-            0 -> "Clubs"
-            1 -> "Diamonds"
-            2 -> "Hearts"
-            else -> "Spades"
+            0 -> clubs
+            1 -> diamonds
+            2 -> hearts
+            else -> spades
         }
 }
