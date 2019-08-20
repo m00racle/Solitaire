@@ -1,10 +1,12 @@
-class TableauPile(var cards : MutableList<Card>) {
+class TableauPile(var cards : MutableList<Card> = mutableListOf()) {
     /*
     This is model of the tableau pile which consist playable cards in the deck. The last card of each list
     mut be face up
      */
     init {
-        cards.last().faceUp //make the last card of the list face up
+        if (cards.size > 0) { //ensure we only make card face up if the card is actually exist in the list
+            cards.last().faceUp //make the last card of the list face up
+        }
     }
 
     fun addCard(newCards : MutableList<Card>) : Boolean{
@@ -29,6 +31,25 @@ class TableauPile(var cards : MutableList<Card>) {
             return true
         }
         return false
+    }
+
+    //method to remove card
+    fun removeCards(tappedIndex:Int){
+        /*
+         build method to remove some cards from the selected card (by tapped) to the last card to be removed
+        from the deck tableau.
+        Assumes: tappedIndex is a positive int of index position of card selected by tapping it
+        Returns: void
+         */
+        // make a iteration of cards from the tappedIndex up to lastIndex
+        for (cardIndex in tappedIndex .. cards.lastIndex){
+            // in each iteration remove the Card object from the cards list
+            cards.removeAt(cardIndex)
+        }
+        //if the tableau still has card left the last card must face up:
+        if (cards.size > 0){
+            cards.last().faceUp = true
+        }
     }
 
     private fun suitCheck(suit1: String, suit2: String): Boolean {

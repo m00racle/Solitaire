@@ -1,5 +1,3 @@
-import java.util.*
-
 class Deck {
     //creating array of card and initializing it
     //in Kotlin initialization does not require keyword new

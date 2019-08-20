@@ -7,4 +7,5 @@ class GameModel {
     val wastePile : MutableList<Card> = mutableListOf() //empty list at first
     val foundationPiles : Array<FoundationPile> = arrayOf(FoundationPile(clubs), FoundationPile(diamonds),
         FoundationPile(hearts), FoundationPile(spades))
+    val tableauPiles = Array(7, { TableauPile() })
 }
