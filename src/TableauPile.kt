@@ -9,7 +9,7 @@ class TableauPile(var cards : MutableList<Card> = mutableListOf()) {
         }
     }
 
-    fun addCard(newCards : MutableList<Card>) : Boolean{
+    fun addCards(newCards : MutableList<Card>) : Boolean{
         /*
         Assumes newCards is a list of Cards which can be moved between card pile in the tableau pile. The card can be
         moved to another list of cards in tableau only if the first value of the newCards list is exactly one smaller
@@ -44,7 +44,8 @@ class TableauPile(var cards : MutableList<Card> = mutableListOf()) {
         // make a iteration of cards from the tappedIndex up to lastIndex
         for (cardIndex in tappedIndex .. cards.lastIndex){
             // in each iteration remove the Card object from the cards list
-            cards.removeAt(cardIndex)
+            cards.removeAt(tappedIndex)
+            //NOTE: we use tapped index since cards is a MUTABLE list thus it will always changed
         }
         //if the tableau still has card left the last card must face up:
         if (cards.size > 0){
@@ -59,7 +60,11 @@ class TableauPile(var cards : MutableList<Card> = mutableListOf()) {
         assumes suit1 and suit2 are Strings for specifying suit of the corresponding cards
         returns boolean if suit1 and suit2 are different in suit color
          */
-
-        return !(redSuits.contains(suit1) && redSuits.contains(suit2))
+        if (redSuits.contains(suit1) && blackSuits.contains(suit2)){
+            return true
+        } else if (blackSuits.contains(suit1) && redSuits.contains(suit2)){
+            return true
+        }
+        return false
     }
 }
