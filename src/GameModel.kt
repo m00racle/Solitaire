@@ -62,4 +62,73 @@ class GameModel {
             wastePile.clear()
         }
     }
+
+    fun onWasteTap() {
+        /*
+        * This function is called when the waste pile is tapped. Here when the card can be played
+        * then the card can be removed from the top of the waste pile*/
+        //check if there are any card in the waste pile only the available one can be played
+        if (wastePile.size > 0) {
+            //get the latest (top) card on the waste pile
+            val card = wastePile.last()
+            //check if the card is playable
+            if (cardIsPlayable(card)){
+                //if it is playable then we remove the card from the waste pile
+                wastePile.remove(card)
+            }
+        }
+    }
+
+    fun onFoundationTap(foundationIndex:Int) {
+        /*
+        * Assumes foundationIndex is an integer of index of the foundation pile which will denotes which suite
+        * it corresponds
+        * This function will be called if the foundation pile is tapped. If the card is playable then the card
+        * will be removed from the foundation pile*/
+        //designate the foundation pile by using the index
+        val foundationPile = foundationPiles[foundationIndex]
+
+        //check if there are indeed cards in corresponding foundation pile
+        if (foundationPile.cards.size > 0){
+            //if the card is playable then remove it from the foundation pile the card is the last card in the
+            //foundation pile
+            val card = foundationPile.cards.last()
+            if (cardIsPlayable(card)){
+                //if the card is playable then just remove it from this foundation pile
+                foundationPile.cards.remove(card)
+
+                /* NOTE: don't worry if the first check of each foundationPile will return true because it will
+                always return false since the last card is not yet removed thus this card will never eligible
+                to be added into the foundationPile*/
+            }
+        }
+    }
+
+    private fun cardIsPlayable(card: Card): Boolean {
+        /*
+        Assumes: card is a Card object
+        * this function will determine if the card variable is playable
+        * by looking at the latest cards inside the tableau pile and foundation pile*/
+
+        //checking each foundation pile
+        foundationPiles.forEach {
+            //if it can be added the card in the foundationPile then return true
+            //remember foundationPile is becomes it here
+            if (it.addCard(card)){
+                //remember the function foundationPile addCard function return boolean
+                return true
+            }
+        }
+
+        //checking each tableau pile
+        tableauPiles.forEach {
+            //if it can be added the card in the tableau pile then return true
+            //remember to use addCard in tableau pile we use mutable list to accommodate multiple cards movements
+            if (it.addCards(mutableListOf(card))){
+                //remember the addCards function of the tableau pile class returns boolean
+                return true
+            }
+        }
+        return false
+    }
 }
