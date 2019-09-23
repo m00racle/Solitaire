@@ -42,4 +42,24 @@ class GameModel {
             tableauPiles[index] = TableauPile(cardsInPile)
         }
     }
+
+    fun onDeckTap() {
+        /*
+        * This function act when user tap on the deck pile
+        * Remember this solitaire game we use single card rule which user can only draw one card each time from deck*/
+        if (deck.cardsInDeck.size > 0){
+            //if there are cards inside the deck then one card will be drawn
+            val card = deck.drawCard()
+            //then make that card face up
+            card.faceUp = true
+            //then transfer that card to waste pile
+            wastePile.add(card)
+        } else {
+            //else if there are no card left on the deck then the waste pile need to return to the deck
+            //remember user may take the cards from the waste pile thus the returned pile is what is left
+            deck.cardsInDeck = wastePile.toMutableList()
+            //since above we only copy the left of waste pile then we need to clear the waste pile
+            wastePile.clear()
+        }
+    }
 }
