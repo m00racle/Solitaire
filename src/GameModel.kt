@@ -15,7 +15,7 @@ class GameModel {
         * it will clear the wastePile and foundationPile objects*/
         //reset the wastePile
         wastePile.clear()
-        //reset all piles inside the foundation pile
+        //reset all piles inside the foundation pile by calling the FoubdationPile object function reset()
         /*for (pile in foundationPiles){
             pile.reset()
         }*/
@@ -25,6 +25,21 @@ class GameModel {
             //call it to represent each file inside foundationPiles, it only represent single
             //object of pile which consist in the above for loop
             it.reset()
+        }
+
+        /*
+        * reset the deck by calling the Deck object class function reset()
+        * this will clear the deck and make new list of card object then shuffle it*/
+        deck.reset()
+
+        /*
+        * Recreate the tableau piles by using the for each will consist of i + 1 number of cards*/
+        tableauPiles.forEachIndexed { index, tableauPile ->
+            //form cards in pile with number exactly index + 1 by building and Array of that size and turn it mutable
+            val cardsInPile: MutableList<Card> = Array(index + 1, {deck.drawCard()}).toMutableList()
+            //add corresponding cardsInPile to the index related tableauPiles
+            //Note: why we cannot use the tableauPile instead of tableauPiles[index]?
+            tableauPiles[index] = TableauPile(cardsInPile)
         }
     }
 }
