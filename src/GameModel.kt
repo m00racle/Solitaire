@@ -104,6 +104,45 @@ class GameModel {
         }
     }
 
+    fun onTableauTap(tableauIndex:Int, cardIndex:Int){
+        /*
+        * Assumes tableauIndex and cardIndex are Integers which denotes the index of the tapped tableau and highest
+        * card index by the user respectively
+        * This function is called when user tap any cards in the tableau pile. It will process the
+        * tableau index and card index to remove the card if the card is playable*/
+
+        //: designate the intended tableau to tap
+        val tableauPile = tableauPiles[tableauIndex]
+        if (tableauPile.cards.size > 0) {
+
+            //: if the tableau really has card then process if the card is playable
+            val cards = tableauPile.cards.subList(cardIndex, tableauPile.cards.lastIndex + 1)
+            //NOTE: the sublist information is in the doc
+
+            //: if the card is playable the remove it from the card index and so on to the last card in the tableau
+            if (cardIsPlayable(cards)){
+                //NOTE: this time we give a Mutable list of Cards as parameter thus we need to define another function
+                //of cardIsPlayable but with Mutable list of Cards as parameter
+                tableauPile.removeCards(cardIndex)
+            }
+        }
+    }
+
+    private fun cardIsPlayable(cards: MutableList<Card>): Boolean {
+        //if the cards is only consist of one card then just called the old cardIsPlayable function
+        if (cards.size == 1){cardIsPlayable(cards)} else{
+            //else just check each of the cards whether it can be added to other tableau pile or not
+            tableauPiles.forEach {
+                if (it.addCards(cards)){
+                    return true
+                }
+            }
+        }
+
+        //if nothing makes criteria just return false
+        return false
+    }
+
     private fun cardIsPlayable(card: Card): Boolean {
         /*
         Assumes: card is a Card object
