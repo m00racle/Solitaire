@@ -1,4 +1,4 @@
-class GameModel {
+object GameModel {
     /**
      * This model the game which includes the deck and waste pile. deck is a list (mutable) of card and also the waste
      * pile.
