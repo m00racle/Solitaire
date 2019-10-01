@@ -170,4 +170,13 @@ object GameModel {
         }
         return false
     }
+
+    fun debugPrint(){
+        /*
+        * This function is used for debug and test purposes
+        * this will printout cards designated by testing the play*/
+
+        //test 1: printing the top card of the deck
+        println(deck.cards.last())
+    }
 }
