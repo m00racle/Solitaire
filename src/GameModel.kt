@@ -130,7 +130,7 @@ object GameModel {
 
     private fun cardIsPlayable(cards: MutableList<Card>): Boolean {
         //if the cards is only consist of one card then just called the old cardIsPlayable function
-        if (cards.size == 1){cardIsPlayable(cards)} else{
+        if (cards.size == 1){cardIsPlayable(cards[0])} else{
             //else just check each of the cards whether it can be added to other tableau pile or not
             tableauPiles.forEach {
                 if (it.addCards(cards)){

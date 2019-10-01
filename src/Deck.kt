@@ -13,6 +13,10 @@ class Deck {
     fun reset() {
         //this returns void and only shuffle the card in deck
         cardsInDeck = cards.toMutableList()
+
+        //make the cards face down before shuffling because in the test we failed to do so
+        cardsInDeck.forEach { it.faceUp = false }
+
         //the Kotlin suggest that Java Collections.shuffle(cardsIndeck) is changed to Kotlin static function of
         //cardsInDeck (which already a Collections class object) and directly call shuffle.
         cardsInDeck.shuffle()
