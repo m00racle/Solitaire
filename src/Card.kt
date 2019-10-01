@@ -18,6 +18,24 @@ data class Card(val cardValue : Int, val suit : String, var faceUp : Boolean =  
         * it will print the value, suit, and faceUp status of any card
         * we use string templates of $ to make it simple*/
 
-        return "${cardsMap[cardValue]} $suit $faceUp"
+        //we need to insert ASCII code into the suit so that it will print out card suit symbol
+        //also we only show the card data if indeed it face up otherwise we just print xxx
+        return if (faceUp) "${cardsMap[cardValue]} ${getSuitChar(suit)}" else "xxx"
     }
+
+    private fun getSuitChar(suit: String): String =
+        /*
+        * this function will return ASCII code for card suit symbol to print out
+        * assuming that suit is String of card suit type
+        * this will use case which in Kotlin is when*/
+        when(suit){
+            diamonds -> "\u2666"
+            clubs -> "\u2663"
+            hearts -> "\u2665"
+            spades -> "\u2660"
+            else -> "incorrect suit"
+        }
+
+
+
 }
