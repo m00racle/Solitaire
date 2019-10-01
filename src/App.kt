@@ -3,5 +3,7 @@ fun main() {
 
     //calling the GameModel object directly since it was a singleton object
     GameModel.resetGame()
+    //add one simulated tap on the deck
+    GamePresenter.onDeckTap()
     GameModel.debugPrint()
 }

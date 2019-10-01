@@ -5,7 +5,8 @@ class TableauPile(var cards : MutableList<Card> = mutableListOf()) {
      */
     init {
         if (cards.size > 0) { //ensure we only make card face up if the card is actually exist in the list
-            cards.last().faceUp //make the last card of the list face up
+            cards.last().faceUp = true //make the last card of the list face up
+            //BUG NOTE: earlier this was not set to true thus it failed to function
         }
     }
 

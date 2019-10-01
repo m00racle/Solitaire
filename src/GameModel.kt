@@ -177,6 +177,36 @@ object GameModel {
         * this will printout cards designated by testing the play*/
 
         //test 1: printing the top card of the deck
-        println(deck.cards.last())
+        //println(deck.cards.last())
+
+        //test 2: printing the first line
+        var firstLine = if (wastePile.size > 0) "${wastePile.last()}" else "___"
+        //add 18 pad line from the waste line to the foundation line
+        firstLine = firstLine.padEnd(18)
+        // loop through all foundation line to see if there is card inside each of them
+        foundationPiles.forEach {
+            firstLine += if (it.cards.size > 0) "${it.cards.last()}" else "___"
+            // add one more space after each foundation line
+            firstLine += " "
+        }
+
+        //print the first line
+        println(firstLine)
+
+        //next we print put the most complicated part the tableau pile
+        //the max row of card in the tableau pile is the 13 th card which will be designated as i
+        //thus if the tableau pile is not empty in index i it will print out the card
+        //otherwise it will only print empty space
+        for (i in 0..12){
+            var row = ""
+            tableauPiles.forEach {
+                //if there are still card in the designated tableau pile then print otherwise print empty spaces
+                row += if (it.cards.size > i) "${it.cards[i]}" else "   "
+                //add one row each card position
+                row += "   "
+            }
+            //print the rows
+            println(row)
+        }
     }
 }

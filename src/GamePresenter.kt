@@ -1,7 +1,8 @@
-class GamePresenter {
+object GamePresenter {
     /*
     * This class is intended as presenter layer of the whole app
     * it's task is to be the middleman between the view (which is the interface) and the model (GameModel)
+    * This is turned into a singleton object since through all the play we only need one presenter
     * */
 
     //created a view object but since it was on the starts then the app UI will not yet ready, thus set it to null
