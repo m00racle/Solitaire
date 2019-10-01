@@ -20,7 +20,8 @@ data class Card(val cardValue : Int, val suit : String, var faceUp : Boolean =  
 
         //we need to insert ASCII code into the suit so that it will print out card suit symbol
         //also we only show the card data if indeed it face up otherwise we just print xxx
-        return if (faceUp) "${cardsMap[cardValue]} ${getSuitChar(suit)}" else "xxx"
+        //we need to add pad in the end of the cards value to make sure all padding is the same
+        return if (faceUp) "${cardsMap[cardValue]}".padEnd(2) + getSuitChar(suit) else "xxx"
     }
 
     private fun getSuitChar(suit: String): String =
